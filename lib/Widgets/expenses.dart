@@ -39,12 +39,24 @@ class _ExpensesState extends State<Expenses> {
       category: Category.travel,
     ),
   ];
+  void _addExpense(ExpenseModel expense) {
+    setState(() {
+      _dummyExpenses.add(expense);
+    });
+  }
+
+  void _deleteExpense(ExpenseModel expense) {
+    setState(() {
+      _dummyExpenses.remove(expense);
+    });
+  }
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (ctx) {
-        return const NewExpense();
+        return NewExpense(_addExpense);
       },
     );
   }
@@ -65,7 +77,8 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text("CHART!"),
           Expanded(
-            child: ExpensesList(expensesList: _dummyExpenses),
+            child: ExpensesList(
+                expensesList: _dummyExpenses, onDeleteExpense: _deleteExpense),
           )
         ],
       ),
