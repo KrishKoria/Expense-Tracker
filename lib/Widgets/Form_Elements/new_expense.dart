@@ -73,18 +73,24 @@ class _NewExpenseState extends State<NewExpense> {
           TextField(
             maxLength: 50,
             controller: _titleController,
-            decoration: const InputDecoration(labelText: "Title"),
+            decoration: InputDecoration(
+              labelText: "Title",
+              labelStyle: Theme.of(context).textTheme.labelMedium,
+            ),
+            style: Theme.of(context).textTheme.labelMedium,
           ),
           Row(
             children: [
               Expanded(
                 child: TextField(
                   controller: _amountController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Amount",
-                    prefix: Text("\$ "),
+                    labelStyle: Theme.of(context).textTheme.labelMedium,
+                    prefix: const Text("\$ "),
                   ),
                   keyboardType: TextInputType.number,
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
               const SizedBox(width: 16),
@@ -97,6 +103,7 @@ class _NewExpenseState extends State<NewExpense> {
                       _selectedDate == null
                           ? "No Date Chosen"
                           : formatter.format(_selectedDate!),
+                      style: Theme.of(context).textTheme.labelSmall,
                     ),
                     IconButton(
                       icon: const Icon(Icons.calendar_month),
@@ -119,7 +126,8 @@ class _NewExpenseState extends State<NewExpense> {
                       children: [
                         Icon(categoryIcons[category]),
                         const SizedBox(width: 8),
-                        Text(category.name.toUpperCase()),
+                        Text(category.name.toUpperCase(),
+                            style: Theme.of(context).textTheme.labelMedium),
                       ],
                     ),
                   );

@@ -110,7 +110,8 @@ class _ExpensesState extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Expense Tracker"),
+        title: Text("Expense Tracker",
+            style: Theme.of(context).textTheme.titleLarge),
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,

@@ -1,6 +1,9 @@
 import 'package:expense_tracker/Widgets/expenses.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+var kColorScheme =
+    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 210, 241, 228));
 void main() {
   runApp(const MyApp());
 }
@@ -10,9 +13,61 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData().copyWith(
+        colorScheme: kColorScheme,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: kColorScheme.primaryContainer,
+          foregroundColor: kColorScheme.onSecondaryContainer,
+        ),
+        cardTheme: const CardTheme().copyWith(
+          color: kColorScheme.primaryContainer,
+          margin: const EdgeInsets.symmetric(
+            vertical: 4,
+            horizontal: 8,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: kColorScheme.primary,
+            backgroundColor: kColorScheme.primaryContainer,
+          ),
+        ),
+        textTheme: const TextTheme().copyWith(
+          titleLarge: TextStyle(
+            fontFamily: GoogleFonts.montserrat().fontFamily,
+            fontWeight: FontWeight.w600,
+            fontSize: 26,
+            color: kColorScheme.onSecondaryContainer,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: GoogleFonts.montserrat().fontFamily,
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
+            color: kColorScheme.primary,
+          ),
+          titleSmall: TextStyle(
+            fontFamily: GoogleFonts.montserrat().fontFamily,
+            fontWeight: FontWeight.w600,
+            fontSize: 14,
+            color: kColorScheme.primary,
+          ),
+          labelMedium: TextStyle(
+            fontFamily: GoogleFonts.montserrat().fontFamily,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            color: kColorScheme.primary,
+          ),
+          labelSmall: TextStyle(
+            fontFamily: GoogleFonts.montserrat().fontFamily,
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+            color: kColorScheme.primary,
+          ),
+        ),
+      ),
       title: "Expenses",
-      home: Expenses(),
+      home: const Expenses(),
     );
   }
 }
