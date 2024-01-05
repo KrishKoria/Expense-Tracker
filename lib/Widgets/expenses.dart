@@ -46,9 +46,54 @@ class _ExpensesState extends State<Expenses> {
   }
 
   void _deleteExpense(ExpenseModel expense) {
+    final index = _dummyExpenses.indexOf(expense);
+
     setState(() {
       _dummyExpenses.remove(expense);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        content: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.white, width: 3),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x19000000),
+                  spreadRadius: 2.0,
+                  blurRadius: 8.0,
+                  offset: Offset(2, 4),
+                )
+              ],
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.delete, color: Colors.black),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text('${expense.title} deleted',
+                      style: const TextStyle(color: Colors.black)),
+                ),
+                const Spacer(),
+                TextButton(
+                    onPressed: () {
+                      setState(
+                        () {
+                          _dummyExpenses.insert(index, expense);
+                        },
+                      );
+                    },
+                    child: const Text("Undo"))
+              ],
+            )),
+      ),
+    );
   }
 
   void _openAddExpenseOverlay() {
@@ -77,8 +122,13 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text("CHART!"),
           Expanded(
-            child: ExpensesList(
-                expensesList: _dummyExpenses, onDeleteExpense: _deleteExpense),
+            child: _dummyExpenses.isNotEmpty
+                ? ExpensesList(
+                    expensesList: _dummyExpenses,
+                    onDeleteExpense: _deleteExpense)
+                : const Center(
+                    child: Text("No expenses added yet!, maybe Add some"),
+                  ),
           )
         ],
       ),
