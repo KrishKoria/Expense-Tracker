@@ -4,6 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 var kColorScheme =
     ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 210, 241, 228));
+
+var kColorSchemeDark = ColorScheme.fromSeed(
+  seedColor: const Color.fromARGB(255, 210, 241, 228),
+  // seedColor: const Color.fromARGB(255, 18, 18, 18),
+  brightness: Brightness.dark,
+);
 void main() {
   runApp(const MyApp());
 }
@@ -66,6 +72,23 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: kColorSchemeDark,
+        cardTheme: const CardTheme().copyWith(
+          color: kColorSchemeDark.primaryContainer,
+          margin: const EdgeInsets.symmetric(
+            vertical: 4,
+            horizontal: 8,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: kColorSchemeDark.primary,
+            backgroundColor: kColorSchemeDark.primaryContainer,
+          ),
+        ),
+      ),
+      themeMode: ThemeMode.system,
       title: "Expenses",
       home: const Expenses(),
     );

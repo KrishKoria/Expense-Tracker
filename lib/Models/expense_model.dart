@@ -38,3 +38,22 @@ class ExpenseModel {
     return formatter.format(date);
   }
 }
+
+class ExpenseBucket {
+  final Category category;
+  final List<ExpenseModel> expenses;
+
+  ExpenseBucket({
+    required this.category,
+    required this.expenses,
+  });
+
+  ExpenseBucket.forCategory(List<ExpenseModel> allExpenses, this.category)
+      : expenses = allExpenses
+            .where((expense) => expense.category == category)
+            .toList();
+
+  double get totalExpenseAmount {
+    return expenses.fold(0.0, (sum, expense) => sum + expense.amount);
+  }
+}
