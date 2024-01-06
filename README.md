@@ -1,16 +1,11 @@
-# expense_tracker
+# Expense Tracker App
 
-A new Flutter project.
+A Semi-beginner Flutter App with custom themes for both dark and light mode users . You can add and delete all your expenses, however this app does not contain any backend, so the data is stored only in memory.
+It also contains a bar chart to visualize your expenses. The App is also responsive and will work in both landscape and portrait mode
+Primarily focused on android, but will run on ios, however it may not look correct
 
 ## Getting Started
+* clone this repository, by running :- `git clone https://github.com/KrishKoria/Expense-Tracker.git`
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* open the cloned folder into your editor of choice and run :- `flutter pub get`
+  
