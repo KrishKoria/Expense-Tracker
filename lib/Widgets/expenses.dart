@@ -99,6 +99,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (ctx) {
@@ -109,6 +110,7 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text("Expense Tracker",
@@ -120,20 +122,35 @@ class _ExpensesState extends State<Expenses> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _dummyExpenses),
-          Expanded(
-            child: _dummyExpenses.isNotEmpty
-                ? ExpensesList(
-                    expensesList: _dummyExpenses,
-                    onDeleteExpense: _deleteExpense)
-                : const Center(
-                    child: Text("No expenses added yet!, maybe Add some"),
-                  ),
-          )
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _dummyExpenses),
+                Expanded(
+                  child: _dummyExpenses.isNotEmpty
+                      ? ExpensesList(
+                          expensesList: _dummyExpenses,
+                          onDeleteExpense: _deleteExpense)
+                      : const Center(
+                          child: Text("No expenses added yet!, maybe Add some"),
+                        ),
+                )
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: Chart(expenses: _dummyExpenses)),
+                Expanded(
+                  child: _dummyExpenses.isNotEmpty
+                      ? ExpensesList(
+                          expensesList: _dummyExpenses,
+                          onDeleteExpense: _deleteExpense)
+                      : const Center(
+                          child: Text("No expenses added yet!, maybe Add some"),
+                        ),
+                )
+              ],
+            ),
     );
   }
 }
